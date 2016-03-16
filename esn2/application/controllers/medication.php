@@ -20,10 +20,32 @@ var  $tb_main="medicationerror";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
+         //$this->load->helper('uri');
          
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
        }
+
+    
+    # http://drugstore.kku.ac.th/esn2/index.php/medication/date_medication/AB0216/11/12/2551
+       public function  date_medication()
+       {
+           $tb=$this->tb_main;
+           $HN=$this->uri->segment(3);
+         //echo "<br>";
+          $d1=$this->uri->segment(4);
+          $d2=$this->uri->segment(5);
+          $d3=$this->uri->segment(6);
+          $dmy=$d1."/".$d2."/".$d3;
+          $q=$this->db->get_where($tb ,array("HN"=>$HN,"MonitoringDate"=>$dmy));
+         // $q=$this->db->get($this->tb_main);
+          foreach($q->result() as $row)
+          {
+            $rows[]=$row;
+          }
+          echo json_encode($rows);
+       }
+
        # http://localhost/ci/index.php/medication/loadMedi/
        public  function loadMedi()
        {

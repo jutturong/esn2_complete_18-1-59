@@ -155,7 +155,7 @@
     </table>
     
     <div id="win_adr" class="easyui-window" title="เพิ่มข้อมูล/แก้ไขข้อมูล ADRs" data-options="
-         modal:true,
+         modal:false,
          closed:true,
          iconCls:'icon-large-smartart',
          size:'large',
@@ -196,7 +196,7 @@
                                                  <option value=4>Incorrect technique</option>
                                         </select>
                                         
-                                        <a href="#" class="easyui-linkbutton"  data-options=" iconCls:'icon-print' " >View</a>  
+                                        <a href="#" class="easyui-linkbutton"  data-options=" iconCls:'icon-print' "  onclick=" $('#dia_adr').dialog('open');  " >View</a>  
                                         <a href="#"  class="easyui-linkbutton"  data-options=" iconCls:'icon-add' " >Add</a>
                                         
                                     </td>
@@ -290,6 +290,282 @@
                         </form>    
     </div>
     
+    
+    
+     <!--  Popup B.Ientity  ADR-->
+    <div class="easyui-dialog"  id="dia_adr"  style="width:750px;height: 600px;padding: 10px;left:30px;top:30px;"  title="B.Identify DRPs(ADRs) History"   
+         data-options=" 
+             closed:true,
+             iconCls:'icon-large-chart',
+             buttons:[   
+             //  {  text:'<< Prev',handler:function(){  alert('t'); }     },
+             //     { text:'Next >>', handler:function(){  alert('t'); }  },
+                {  text:'Close',iconCls:'icon-cancel', handler:function(){  $('#dia_drp').dialog('close');  } },        
+             ]
+         " 
+         >
+        <div style="padding: 10px;">
+            <label>
+                
+                 Monitoring Date :
+                 
+                <!-- url:'<?=base_url()?>index.php/otherdrp/loadOtherdrp/',  -->
+                <input class="easyui-combobox"   id="adr_date"   style="width:200px;height: 30px;" 
+                       data-options="
+                       //http://drugstore.kku.ac.th/esn2/index.php/adr/date_adr/
+                          url:'<?=base_url()?>index.php/adr/date_adr/'  +   $('#HN_adr').textbox('getValue')   ,
+                          valueField:'MonitoringDate',
+                          textField:'MonitoringDate',
+                          onSelect:function()
+                          {
+                                  var   d=$('#adr_date').combobox('getValue');
+                                 var   url = '<?=base_url()?>index.php/adr/data_hn_dar/'  +   $('#adr_date').combobox('getValue')    +   '/'   +  $('#HN_adr').textbox('getValue');  
+                                 //http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/27/12/2555/gn2339
+                               //  alert(url);
+                                 
+                                /* 
+                                 $.post(url,function(data)
+                                     {   
+                                          alert(data);
+                                     });
+                           */
+
+                                $.getJSON(url,function(data)
+                                   {  
+                                        $.each(data,function(v,k)
+                                        {
+
+                                              var  DRPselection2=k.DRPselection2;  //DRPselection2_adr
+                                              // alert(DRPselection2);
+                                             $('#DRPselection2_adr').combobox('setValue',DRPselection2);
+                                          
+                                               
+                                        
+                                             var  DRPDrug2=k.DRPDrug2;
+                                             //  alert(DRPDrug2);
+                                               $('#DRPDrug2_adr').combobox('setValue',DRPDrug2);
+                                         
+                                               
+                                             var  ADRDetail2=k.ADRDetail2;
+                                             $('#ADRDetail2_adr').textbox('setValue', ADRDetail2 );
+                                             
+                                             
+                                             var  Action2=k.Action2;
+                                             if( Action2 == '1' )
+                                             {
+                                                  $('#Action2_1').attr('checked',true);
+                                             }
+                                             else if( Action2 == '2'  )
+                                             {
+                                                 $('#Action2_2').attr('checked',true);
+                                             }
+                                      
+                                         
+                                         var   InterventionPT2_1 = k.InterventionPT2_1;
+                                       //  alert(  InterventionPT2_1  ); 
+                                         if( InterventionPT2_1 == 'Y' )
+                                         {
+                                             $('#InterventionPT2-1_adr').attr('checked',true);
+                                         }
+                                      
+                                        
+                                         var  InterventionPT2_2=k.InterventionPT2_2;
+                                         // alert(  InterventionPT2_2 );
+                                         if(   InterventionPT2_2 == 'Y'   )
+                                         {
+                                                $('#InterventionPT2-2_adr').attr('checked',true);
+                                         }
+                                 
+                                         var  InterventionPT2_3=k.	InterventionPT2_3;
+                                             //  alert( InterventionPT2_3  );
+                                         if(   InterventionPT2_3 == 'Y'   )
+                                         {
+                                                $('#InterventionPT2-3_adr').attr('checked',true);
+                                         }  
+                                       
+                                         var   InterventionPT2_4=k.InterventionPT2_4;
+                                           // alert(   InterventionPT2_4   );
+                                         if(  InterventionPT2_4 == 'Y'   )
+                                         {
+                                                $('#InterventionPT2-4_adr').attr('checked',true);
+                                         } 
+                                         
+                                         
+                                               
+                                        });
+                                   });     
+                           
+                                
+                          }
+                       "
+                       />
+                
+               
+            </label>
+            
+        </div>
+        
+        <div style="padding: 10px;">
+            <label>
+                ADRs :  <input class="easyui-combobox"  id="DRPselection2_adr"  style="width:200px;height: 30px;" 
+                               data-options="
+                                  url:'<?=base_url()?>index.php/adr/loadADR',
+                                  valueField:'DRPselection2',
+                                  textField:'DRPselection2',
+                               "
+                               />
+            </label>
+        </div>
+        
+        <div style="padding: 10px;">
+            <label>
+                Drug/Product : <input class="easyui-combobox"   id="DRPDrug2_adr"    style="width: 200px;height: 30px;" 
+                                      data-options="
+                                      url:'<?=base_url()?>index.php/otherdrp/tb_drug',
+                                      valueField:'Drug',
+                                      textField:'Drug',
+                                      mode:'remote',
+                                      
+                                      "
+                                      />
+            </label>
+        </div>
+        
+        <div style="padding: 10px;">
+            <label>
+                Detail : <input class="easyui-textbox" multiline="true"  id="ADRDetail2_adr"  style="width:300px;height: 50px;"    />
+            </label>
+        </div>
+        
+        
+        
+        
+         <div style="padding: 10px;">
+             
+             Action :   <input  type="radio" id="Action2_1"      value="1"> Prevent
+             <input  type="radio"  id="Action2_2"    value="2"> Correct
+        
+            
+        </div>
+        
+
+        <div style="padding: 10px;">
+            <label>
+                  <?=nbs(40)?>
+                Intervention
+                <?=nbs(50)?>
+                Patient
+            </label>
+        </div>
+        
+         <div style="padding: 10px;">
+             <label>
+                 <input type="checkbox"  id="InterventionPT2-1_adr"  /> Adjust for appropriate therapy due to health system
+                  <?=nbs(10)?>
+                 <input type="checkbox"  id="InterventionDoctor2-1_adr"  /> Add new medication
+             </label>
+        </div>
+        <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"  id="InterventionPT2-2_adr" /> Correct technique of administration
+                  <?=nbs(10)?>
+                  <input type="checkbox"   id="InterventionDoctor2-2_adr" /> Adjust dosage regimen
+             </label>
+        </div>
+            <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"  id="InterventionPT2-3_adr"  /> Improve compliance
+                  <?=nbs(10)?>
+                  <input type="checkbox"  id="InterventionDoctor2-3_adr"  /> Confirm prescription
+             </label>
+        </div>
+        
+               <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"  id="InterventionPT2-4_adr" /> Inform drug related problems
+                  <?=nbs(10)?>
+                  <input type="checkbox"  id="InterventionDoctor2-4_adr"  /> Discontinue medication
+             </label>
+        </div>
+        
+         <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"  id="InterventionPT2-5_adr"  /> Life style modification
+                  <?=nbs(10)?>
+                  <input type="checkbox" id="InterventionDoctor2-5_adr"   /> Inform drug relate problems
+             </label>
+        </div>
+        
+                 <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"  id="InterventionPT2-6_adr"  /> Monitor efficacy and toxicity
+                  <?=nbs(10)?>
+                  <input type="checkbox"  id="InterventionDoctor2-6_adr"  /> Suggest changing medication
+             </label>
+        </div>
+        
+         <div style="padding: 10px;">
+              <label>
+                  <input type="checkbox"   id="InterventionPT2-7_adr" /> Prevention of Adverse drug reaction
+                  <?=nbs(10)?>
+                  <input type="checkbox"  id="InterventionDoctor2-7_adr"  /> Suggest laboratory
+             </label>
+        </div>
+        
+        
+        <div style="padding: 10px">
+            <label>
+                 Response :
+            </label>
+            
+        </div>
+        
+        <div style="padding: 10px">
+            <label>
+               
+                <input type="radio"  id="adr_response"  name="drp_response"  /> Resolved
+                <input type="radio"  id="adr_improved"  name="drp_improved" /> Improved 
+                
+                
+                <input class="easyui-textbox"  data-options=" multiline:true "  id="ResponseDetail3_adr"  name="ResponseDetail3_adr"  style="width:300px;height: 50px;"   />
+                  
+                <br>
+                
+                <input type="radio" id="adr_notim"   name="adr_notim" /> Not Improved
+                <input type="radio"  id="adr_na" name="adr_na" /> N/A
+                
+            </label>
+
+        </div>
+        
+
+
+        
+                 <div style="padding: 10px">
+                     <label>
+                         ผู้ประเมิน : <input class="easyui-combogrid"  style="width:200px;height: 30px;"  
+                                             data-options="
+                                                url:'<?=base_url()?>index.php/otherdrp/tb_user',
+                                             idField:'UserCode',
+                                              textField:'UserName'  ,
+                                              mode:'remote',
+                                             method:'post',
+                                             singleSelect:true,
+                                          
+                                              fitColumns:true,
+                                              columns : [[
+                                                {  field:'UserName', title:'UserName', },
+                                                {  field:'UserSurname',title:'UserSurname', },
+                                                
+                                              ]]
+                                             "
+                                             />    
+                     </label>
+              </div>
+
+        
+    </div>
+     <!--  Popup B.Ientity -->
 </body>
 </html>
     

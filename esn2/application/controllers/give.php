@@ -29,6 +29,7 @@ var  $tb_main="06_giveinformation"; //06_giveinformation
        
        
        # http://localhost/ci/index.php/give/loadgive/
+       #http://drugstore.kku.ac.th/esn2/index.php/give/loadgive/
        public  function loadgive()
        {
            $tb=$this->tb_main;
@@ -43,6 +44,43 @@ var  $tb_main="06_giveinformation"; //06_giveinformation
              
             
              echo json_encode($va_arr);
+       }
+       
+       
+       public  function loadgive_byHN()
+       {
+           
+           $HN=$this->uri->segment(3);
+           $tb=$this->tb_main;
+          
+           $objquery=$this->db->get($tb,array("HN"=>$HN),10,0);
+           $va_arr = array(); 
+           foreach($objquery->result() as $row )
+            {
+               
+                 array_push($va_arr,$row);
+            }
+             
+            
+             echo json_encode($va_arr);
+       }
+       
+       public  function  date_give()
+       {
+          //  http://drugstore.kku.ac.th/esn2/index.php/give/date_give/
+           $tb=$this->tb_main;
+           $d1=$this->uri->segment(3);
+           $d2=$this->uri->segment(4);
+            $d3=$this->uri->segment(5);
+            $dcall=$d1."/".$d2."/".$d3;
+            //echo  $dcall;
+            $HN=$this->uri->segment(6);
+            $que=$this->db->get_where($tb,array("MonitoringDate"=>$dcall,"HN"=>$HN));
+            foreach($que->result() as $row)
+            {
+                 $rows[]=$row;
+            }
+             echo  json_encode($rows);           
        }
        
       # http://localhost/ci/index.php/give/loadgiveHN/ES0597

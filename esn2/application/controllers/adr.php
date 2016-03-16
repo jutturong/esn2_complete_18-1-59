@@ -8,6 +8,7 @@ var  $name_app1="(Appendix 1 ) แบบบันทึกข้อมูลพ�
 
 //var  $tb_main="08-adr"; 
 var  $tb_main="adr_1";  
+//var  $tb_main="#mysql50#08-adr";
 
 
  
@@ -24,6 +25,52 @@ var  $tb_main="adr_1";
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
        }
+       
+      
+       public function data_hn_dar()
+       {
+            //http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/27/12/2555/gn2339
+             # http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/
+            $tb=$this->tb_main;
+            $d1=$this->uri->segment(3);
+            $d2=$this->uri->segment(4);
+            $d3=$this->uri->segment(5);
+          $HN=$this->uri->segment(6);
+      
+         $dmy=$d1."/".$d2."/".$d3;    #01/02/2553    => 27/12/2555
+      
+        
+      //  $objquery=$this->db->get_where($tb,array("HN"=>$HN));
+        //SELECT * FROM `adr_1` WHERE `HN`='gn2339' and `MonitoringDate`='27/12/2555' 
+        // SELECT * FROM `adr_1` WHERE `HN`='gn2339' ORDER BY `HN` ASC 
+        //SELECT * FROM `adr_1` WHERE `HN`='gn2339' and  `MonitoringDate`='27//12//2555'
+      //  $objquery = $this->db->query(" SELECT * FROM `adr_1` WHERE     `MonitoringDate`  =   ''      ");
+           $objquery=$this->db->get_where($tb,array("MonitoringDate"=>$dmy));
+           foreach($objquery->result() as $row )
+            {
+                $rows[]=$row;
+            }
+            echo  json_encode( $rows);
+        
+            
+
+       }
+
+       public  function date_adr()
+       {
+          
+            # http://drugstore.kku.ac.th/esn2/index.php/adr/date_adr/
+            $tb=$this->tb_main;
+            $HN=$this->uri->segment(3);
+          // $objquery=$this->db->get($tb,array("HN"=>$HN));
+           $objquery=$this->db->get($tb);
+           foreach($objquery->result() as $row )
+            {
+                $rows[]=$row;
+            }
+            echo  json_encode($rows);
+       }
+       
        # http://localhost/ci/index.php/adr/loadADR/
        public  function loadADR()
        {

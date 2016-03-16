@@ -30,8 +30,50 @@ var  $tb_main="noncompliance_1";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
+         $this->load->model('date');
          
        }
+       
+       public  function  dmy_noncomp()
+       {
+           # http://drugstore.kku.ac.th/esn2/index.php/noncomp/dmy_noncomp/AA0096/25/08/2554
+           # AA0096
+           # 25/08/2554
+           $HN=$this->uri->segment(3);
+           $d1=$this->uri->segment(4);
+           $d2=$this->uri->segment(5);
+            $d3=$this->uri->segment(6);
+            $dmy=$d1."/".$d2."/".$d3;
+           $tb=$this->tb_main;
+        //   $q=$this->db->get_where($tb,array("HN"=>$HN,"MonitoringDate"=>$dmy));
+            $q=$this->db->get_where($tb,array("HN"=>$HN));
+           foreach($q->result() as $row )
+           {
+               $rows[]=$row;
+           }
+           echo  json_encode($rows);
+       }
+       
+        public  function  dmy_hn_noncomp()
+       {
+           # http://drugstore.kku.ac.th/esn2/index.php/noncomp/dmy_hn_noncomp/AA0096/25/08/2554
+           # AA0096
+           # 25/08/2554
+           $HN=$this->uri->segment(3);
+           $d1=$this->uri->segment(4);
+           $d2=$this->uri->segment(5);
+            $d3=$this->uri->segment(6);
+            $dmy=$d1."/".$d2."/".$d3;
+           $tb=$this->tb_main;
+          $q=$this->db->get_where($tb,array("HN"=>$HN,"MonitoringDate"=>$dmy));
+         //   $q=$this->db->get_where($tb,array("HN"=>$HN));
+           foreach($q->result() as $row )
+           {
+               $rows[]=$row;
+           }
+           echo  json_encode($rows);
+       }
+       
        # http://localhost/ci/index.php/general/loadGeneral/
        
        public  function loadGeneral()
@@ -92,43 +134,84 @@ var  $tb_main="noncompliance_1";
              echo json_encode($va_arr);
        }
        
+       public function instNON()
+       {
+           #http://drugstore.kku.ac.th/esn2/index.php/noncomp/instNON
+            $HN_non=$this->input->get_post('HN_non');
+         //echo "<br>";
+          
+          $MonitoringDate_non=$this->input->get_post('MonitoringDate_non');
+         //echo "<br>";
+          
+          $DRPselection1 = $this->input->get_post('DRPselection1'); //Non Compliance Type
+        //  echo "<br>";
+          $NonComplianceDrug1=$this->input->get_post('NonComplianceDrug1'); //Drug/Product :
+         // echo "<br>";
+          $NonComplianceDetail1=$this->input->get_post('NonComplianceDetail1'); //Detail :
+         // echo "<br>";
+            $Action1=$this->input->get_post('Action1'); //Action
+         // echo  "<br>";       
+          $Response1=$this->input->get_post('Response1'); //Result
+          //echo  "<br>"; 
+          $ResponseDetail1=$this->input->get_post('ResponseDetail1'); //Result detail :
+        //  echo  "<br>";
+           $Cause1_1=$this->input->get_post('Cause1_1'); //สาเหตุจากตัวผู้ป่วย 
+        //  echo  "<br>";
+          $Cause1_2=$this->input->get_post('Cause1_2');  //สาเหตุจากโรค
+         // echo  "<br>";        
+           $Cause1_3=$this->input->get_post('Cause1_3');    //สาเหตุจากยา
+          //echo  "<br>";
+             $Cause1_4=$this->input->get_post('Cause1_4');  //สาเหตุจากผู้ดูแล
+          //echo  "<br>";
+          $Cause1_5=$this->input->get_post('Cause1_5'); //สาเหตุอื่นๆ
+          //echo "<br>";
+          $followup_non=$this->input->get_post('followup_non');  //follow up
+         // echo "<br>";
+           $week_non=$this->input->get_post('week_non');  // week 
+        //  $conv_week_non=$this->user_model->databox_conv($week_non);  
+          
+          
+       }
       public function insertNoncomp()
       {
+          #http://drugstore.kku.ac.th/esn2/index.php/noncomp/insertNoncomp
           //http://localhost/ci/index.php/noncomp/insertNoncomp/
-          echo  $HN_non=$this->input->get_post('HN_non');
-          echo "<br>";
+          $HN_non=$this->input->get_post('HN_non');
+         //echo "<br>";
           
-          echo  $MonitoringDate_non=$this->input->get_post('MonitoringDate_non');
-          echo "<br>";
+          $MonitoringDate_non=$this->input->get_post('MonitoringDate_non');
+         //echo "<br>";
           
-          echo  $DRPselection1 = $this->input->get_post('DRPselection1'); //Non Compliance Type
-          echo "<br>";
-          echo  $NonComplianceDrug1=$this->input->get_post('NonComplianceDrug1'); //Drug/Product :
-          echo "<br>";
-          echo  $NonComplianceDetail1=$this->input->get_post('NonComplianceDetail1'); //Detail :
-          echo "<br>";
-          echo  $Action1=$this->input->get_post('Action1'); //Action
-          echo  "<br>";       
-          echo  $Response1=$this->input->get_post('Response1'); //Result
-          echo  "<br>"; 
-          echo  $ResponseDetail1=$this->input->get_post('ResponseDetail1'); //Result detail :
-          echo  "<br>";
-          echo  $Cause1_1=$this->input->get_post('Cause1_1'); //สาเหตุจากตัวผู้ป่วย 
-          echo  "<br>";
-          echo  $Cause1_2=$this->input->get_post('Cause1_2');  //สาเหตุจากโรค
-          echo  "<br>";        
-          echo  $Cause1_3=$this->input->get_post('Cause1_3');    //สาเหตุจากยา
-          echo  "<br>";
-          echo   $Cause1_4=$this->input->get_post('Cause1_4');  //สาเหตุจากผู้ดูแล
-          echo  "<br>";
-          echo  $Cause1_5=$this->input->get_post('Cause1_5'); //สาเหตุอื่นๆ
-          echo "<br>";
-          echo  $followup_non=$this->input->get_post('followup_non');  //follow up
-          echo "<br>";
-          echo  $week_non=$this->input->get_post('week_non');  // week 
-          $conv_week_non=$this->user_model->databox_conv($week_non);  
+          $DRPselection1 = $this->input->get_post('DRPselection1'); //Non Compliance Type
+        //  echo "<br>";
+          $NonComplianceDrug1=$this->input->get_post('NonComplianceDrug1'); //Drug/Product :
+         // echo "<br>";
+          $NonComplianceDetail1=$this->input->get_post('NonComplianceDetail1'); //Detail :
+         // echo "<br>";
+            $Action1=$this->input->get_post('Action1'); //Action
+         // echo  "<br>";       
+          $Response1=$this->input->get_post('Response1'); //Result
+          //echo  "<br>"; 
+          $ResponseDetail1=$this->input->get_post('ResponseDetail1'); //Result detail :
+        //  echo  "<br>";
+           $Cause1_1=$this->input->get_post('Cause1_1'); //สาเหตุจากตัวผู้ป่วย 
+        //  echo  "<br>";
+          $Cause1_2=$this->input->get_post('Cause1_2');  //สาเหตุจากโรค
+         // echo  "<br>";        
+           $Cause1_3=$this->input->get_post('Cause1_3');    //สาเหตุจากยา
+          //echo  "<br>";
+             $Cause1_4=$this->input->get_post('Cause1_4');  //สาเหตุจากผู้ดูแล
+          //echo  "<br>";
+          $Cause1_5=$this->input->get_post('Cause1_5'); //สาเหตุอื่นๆ
+          //echo "<br>";
+          $followup_non=$this->input->get_post('followup_non');  //follow up
+         // echo "<br>";
+           $week_non=$this->input->get_post('week_non');  // week 
+         // $conv_week_non=$this->user_model->databox_conv($week_non);  
+        $conv_week_non=$this->date->conv_date($week_non);
+        
           
-          $tb=$this->tb_main;
+          /*
           $this->db->set('HN',$HN_non);
           $this->db->set('MonitoringDate',$MonitoringDate_non);          
           $this->db->set('DRPselection1',$DRPselection1);
@@ -144,8 +227,40 @@ var  $tb_main="noncompliance_1";
           $this->db->set('Cause1_5',$Cause1_5);
           $this->db->set('followup',$followup_non);
           $this->db->set('dmyweek',$conv_week_non);
+           * 
+             $this->db->insert($tb);
+          */
           
-          $this->db->insert($tb);
+          $tb=$this->tb_main;
+          $data=array(
+              'HN'=>$HN_non,
+              'MonitoringDate'=>$MonitoringDate_non,
+              'DRPselection1'=>$DRPselection1,         
+              'NonComplianceDrug1'=>$NonComplianceDrug1,
+              'NonComplianceDetail1'=>$NonComplianceDetail1,
+              'Action1'=>$Action1,
+              'Response1'=>$Response1,
+              'ResponseDetail1'=>$ResponseDetail1,
+              'Cause1_1'=>$Cause1_1,
+              'Cause1_2'=>$Cause1_2, 
+              'Cause1_3'=>$Cause1_3,
+              'Cause1_4'=>$Cause1_4,
+              'Cause1_5'=>$Cause1_5,
+              'followup'=>$followup_non,
+              'dmyweek'=>$conv_week_non,
+          );
+          
+         
+              $ck=$this->db->insert($tb,$data);
+             if( $ck )
+             {
+                 echo "1";
+             }
+             else
+             {
+                 echo "0";
+             }
+          
           
       }
       
