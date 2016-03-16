@@ -21,6 +21,7 @@ var  $tb_main="adr_1";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
+         $this->load->model('date');
          
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
@@ -31,28 +32,20 @@ var  $tb_main="adr_1";
        {
             //http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/27/12/2555/gn2339
              # http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/
-            $tb=$this->tb_main;
+      
             $d1=$this->uri->segment(3);
             $d2=$this->uri->segment(4);
             $d3=$this->uri->segment(5);
-          $HN=$this->uri->segment(6);
-      
-         $dmy=$d1."/".$d2."/".$d3;    #01/02/2553    => 27/12/2555
-      
-        
-      //  $objquery=$this->db->get_where($tb,array("HN"=>$HN));
-        //SELECT * FROM `adr_1` WHERE `HN`='gn2339' and `MonitoringDate`='27/12/2555' 
-        // SELECT * FROM `adr_1` WHERE `HN`='gn2339' ORDER BY `HN` ASC 
-        //SELECT * FROM `adr_1` WHERE `HN`='gn2339' and  `MonitoringDate`='27//12//2555'
-      //  $objquery = $this->db->query(" SELECT * FROM `adr_1` WHERE     `MonitoringDate`  =   ''      ");
-           $objquery=$this->db->get_where($tb,array("MonitoringDate"=>$dmy));
-           foreach($objquery->result() as $row )
+            $HN=$this->uri->segment(6);
+            $dmy=  $d1."/".$d2."/".$d3  ;    #01/02/2553    => 27/12/2555
+            $tb=$this->tb_main;
+            $q=$this->db->get_where($tb,array("HN"=>$HN));
+              $va_arr = array(); 
+            foreach($q->result() as $row)
             {
-                $rows[]=$row;
+                   $rows[]=$row;
             }
-            echo  json_encode( $rows);
-        
-            
+                   echo json_encode($rows);
 
        }
 
@@ -62,8 +55,8 @@ var  $tb_main="adr_1";
             # http://drugstore.kku.ac.th/esn2/index.php/adr/date_adr/
             $tb=$this->tb_main;
             $HN=$this->uri->segment(3);
-          // $objquery=$this->db->get($tb,array("HN"=>$HN));
-           $objquery=$this->db->get($tb);
+           $objquery=$this->db->get_where($tb,array("HN"=>$HN));
+        //   $objquery=$this->db->get($tb);
            foreach($objquery->result() as $row )
             {
                 $rows[]=$row;
@@ -162,28 +155,31 @@ var  $tb_main="adr_1";
        public function  insertADR()
        {
            $tb=$this->tb_main;
-           echo  $HN_adr=trim($this->input->get_post('HN_adr'));
-           echo "<br>";
-           echo  $MonitoringDate_adr=trim($this->input->get_post('MonitoringDate_adr'));
-           echo "<br>";
-           echo  $DRPselection2=trim($this->input->get_post('DRPselection2'));
-           echo  "<br>";
-           echo  $DRPDrug2=trim($this->input->get_post('DRPDrug2'));
-           echo "<br>";
-           echo $ADRDetail2=trim($this->input->get_post('ADRDetail2'));
-           echo "<br>";
-           echo  $Action2=trim($this->input->get_post('Action2'));
-           echo "<br>";
-           echo  $Response2=trim($this->input->get_post('Response2'));
-           echo "<br>";
-           echo  $ResponseDetail2=trim($this->input->get_post('ResponseDetail2'));
-           echo "<br>";
-           echo  $followup_adr=trim($this->input->get_post('followup_adr'));
-           echo "<br>";
-           echo  $week_adr=trim($this->input->get_post('week_adr'));
-           echo "<br>";
-           echo  $conv_week_adr=$this->user_model->databox_conv($week_adr);  
-           echo "<br>";
+            $HN_adr=trim($this->input->get_post('HN_adr'));
+        //   echo "<br>";
+            $MonitoringDate_adr=trim($this->input->get_post('MonitoringDate_adr'));
+          // echo "<br>";
+             $DRPselection2=trim($this->input->get_post('DRPselection2'));
+          // echo  "<br>";
+             $DRPDrug2=trim($this->input->get_post('DRPDrug2'));
+          // echo "<br>";
+            $ADRDetail2=trim($this->input->get_post('ADRDetail2'));
+          // echo "<br>";
+            $Action2=trim($this->input->get_post('Action2'));
+           //echo "<br>";
+             $Response2=trim($this->input->get_post('Response2'));
+        //   echo "<br>";
+             $ResponseDetail2=trim($this->input->get_post('ResponseDetail2'));
+           //echo "<br>";
+           $followup_adr=trim($this->input->get_post('followup_adr'));
+          // echo "<br>";
+             $week_adr=trim($this->input->get_post('week_adr'));
+          // echo "<br>";
+     //      echo  $conv_week_adr=$this->user_model->databox_conv($week_adr);  
+    //       echo "<br>";
+              $conv_week_adr =  $this->date->conv_date( $week_adr );
+          // echo "<br>";
+           
            
                 $this->db->set('HN', $HN_adr );
                 $this->db->set('MonitoringDate', $MonitoringDate_adr );
@@ -194,8 +190,18 @@ var  $tb_main="adr_1";
                 $this->db->set('Response2', $Response2 );
                 $this->db->set('ResponseDetail2', $ResponseDetail2 );
                 $this->db->set('followup_adr', $followup_adr );
-                $this->db->set('week_adr', $conv_week_adr );              
-                $this->db->insert($tb);  
+                $this->db->set('week_adr', $conv_week_adr );     
+                
+                
+                $ck=$this->db->insert($tb);  
+                if( $ck )
+                {
+                    echo "1";
+                }
+                else
+                {
+                    echo "0";
+                }
             
        }
        

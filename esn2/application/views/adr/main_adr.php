@@ -16,7 +16,15 @@
                 url:url ,
                 success:function(result)
                 {
-                   // alert(result);
+                    // alert(result);
+                      if( result == '1' )
+                      {
+                            $.messager.alert('สถานะการบันทึก','บันทึกสำเร็จ','Info');
+                      }
+                      else if( result == '0'  )
+                      {
+                             $.messager.alert('สถานะการบันทึก','บันทึกล้มเหลว','Err');
+                      }
                     $("#win_adr").window('close');
                     $('#dg_adr').datagrid('reload');
                 }
@@ -300,7 +308,7 @@
              buttons:[   
              //  {  text:'<< Prev',handler:function(){  alert('t'); }     },
              //     { text:'Next >>', handler:function(){  alert('t'); }  },
-                {  text:'Close',iconCls:'icon-cancel', handler:function(){  $('#dia_drp').dialog('close');  } },        
+                {  text:'Close',iconCls:'icon-cancel', handler:function(){  $('#dia_adr').dialog('close');  } },        
              ]
          " 
          >
@@ -319,8 +327,9 @@
                           onSelect:function()
                           {
                                   var   d=$('#adr_date').combobox('getValue');
-                                 var   url = '<?=base_url()?>index.php/adr/data_hn_dar/'  +   $('#adr_date').combobox('getValue')    +   '/'   +  $('#HN_adr').textbox('getValue');  
-                                 //http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/27/12/2555/gn2339
+                                   var   url = '<?=base_url()?>index.php/adr/data_hn_dar/'  +   $('#adr_date').combobox('getValue')    +   '/'   +  $('#HN_adr').textbox('getValue');  
+                                  
+                              //    var   test_url = 'http://drugstore.kku.ac.th/esn2/index.php/adr/data_hn_dar/04/10/2555/AA0105'
                                //  alert(url);
                                  
                                 /* 
@@ -330,7 +339,7 @@
                                      });
                            */
 
-                                $.getJSON(url,function(data)
+                                $.getJSON( url   ,function(data)
                                    {  
                                         $.each(data,function(v,k)
                                         {
@@ -390,7 +399,113 @@
                                                 $('#InterventionPT2-4_adr').attr('checked',true);
                                          } 
                                          
+                                         var InterventionPT2_5=k.InterventionPT2_5;
+                                         if(  InterventionPT2_5 == 'Y'  )
+                                         {
+                                                    $('#InterventionPT2-5_adr').attr('checked',true);
+                                         }
+                                 
                                          
+                                         var  InterventionPT2_6=k.InterventionPT2_6;
+                                         //alert( InterventionPT2_6 );
+                                         if(    InterventionPT2_6 == 'Y'   )
+                                         {
+                                               $('#InterventionPT2-6_adr').attr('checked',true);
+                                         }
+                                         
+                                         var  InterventionPT2_7=k.InterventionPT2_7;
+                                        // alert( InterventionPT2_7 );
+                                        if(     InterventionPT2_7  == 'Y'   )
+                                        {
+                                              $('#InterventionPT2-7_adr').attr('checked',true);
+                                        }
+                                         
+                                        var  InterventionDoctor2_1=k.InterventionDoctor2_1;
+                                       // alert(InterventionDoctor2_1);
+                                       if(  InterventionDoctor2_1  == 'Y')  
+                                       {
+                                               $('#InterventionDoctor2-1_adr').attr('checked',true);
+                                       }
+                                     
+                                        
+                                        var  InterventionDoctor2_2=k.InterventionDoctor2_2;
+                                        // alert(   InterventionDoctor2_2   );
+                                        if(  InterventionDoctor2_2 == 'Y'  )
+                                        {
+                                              $('#InterventionDoctor2-2_adr').attr('checked',true);
+                                        }
+                                        
+                                        var  InterventionDoctor2_3=k.InterventionDoctor2_3;
+                                        //alert( InterventionDoctor2_3 );
+                                        if(   InterventionDoctor2_3 == 'Y')
+                                        {
+                                              $('#InterventionDoctor2-3_adr').attr('checked',true);
+                                        }
+                                        
+                                        
+                                        var  InterventionDoctor2_4=k.InterventionDoctor2_4;
+                                       // alert(   InterventionDoctor2_4  );
+                                        if(   InterventionDoctor2_4  == 'Y'  )
+                                        {
+                                               $('#InterventionDoctor2-4_adr').attr('checked',true);
+                                        }
+                                        
+                                        
+                                        var  InterventionDoctor2_5=k.InterventionDoctor2_5;
+                                       // alert(    InterventionDoctor2_5   );
+                                        if(   InterventionDoctor2_5  == 'Y'   )
+                                        {
+                                             $('#InterventionDoctor2-5_adr').attr('checked',true);
+                                        }
+                                        
+                                        
+                                        var   InterventionDoctor2_6=k.InterventionDoctor2_6;
+                                      //  alert(  InterventionDoctor2_6  );
+                                        if( InterventionDoctor2_6  == 'Y'  )
+                                        {
+                                              $('#InterventionDoctor2-6_adr').attr('checked',true);
+                                        }
+                                        
+                                        var   InterventionDoctor2_7=k.InterventionDoctor2_7;
+                                      //  alert(   InterventionDoctor2_7  );
+                                        if(  InterventionDoctor2_7  == 'Y'  )
+                                        {
+                                               $('#InterventionDoctor2-7_adr').attr('checked',true);
+                                        }
+                                        
+                                        
+                                        var   Response2=k.Response2;
+                                       // alert( Response2 );
+                                       if( Response2  == '1')
+                                       {
+                                            $('#adr_response').attr('checked',true);
+                                       }
+                                       else if( Response2 == '2' )
+                                       {
+                                           $('#adr_improved').attr('checked',true);
+                                       }
+                                       else if(  Response2 == '3' )
+                                       {
+                                            $('#adr_notim').attr('checked',true);
+                                       }
+                                       else if( Response2 == '4' )
+                                       {
+                                            $('#adr_na').attr('checked',true);                  
+                                       }
+                                        
+                                        
+                                        
+                                        var    ResponseDetail2=k.ResponseDetail2;
+                                       // alert( ResponseDetail2 );
+                                        $('#ResponseDetail3_adr').textbox('setValue',ResponseDetail2);
+                                        
+                                     //   var    ConfirmForDelete=k.ConfirmForDelete;
+                                        
+                                        var   followup_adr=k.followup_adr;
+                                        
+                                        var   week_adr=k.week_adr;
+                                        
+                                        
                                                
                                         });
                                    });     
@@ -407,13 +522,32 @@
         
         <div style="padding: 10px;">
             <label>
-                ADRs :  <input class="easyui-combobox"  id="DRPselection2_adr"  style="width:200px;height: 30px;" 
+                ADRs :  <input class="easyui-combobox"  id="DRPselection2_adr"  style="width: 200px;height: 30px;" 
+                                      data-options="
+                                      valueField:'value',
+                                      textField:'label',
+                                      data:[
+                                         { value:0,label:' No ' },
+                                         {  value:1,label:'Over dosage'    },
+                                         {  value:2,label:'Under dosage'    },
+                                         {  value:3,label:'Not compliance with the life style'    },
+                                         {  value:4,label:'Incorrect technique'    },
+                                      ]
+                                      "
+                                      />
+                     
+                <!--
+                <input class="easyui-combobox"  id="DRPselection2_adr"  style="width:200px;height: 30px;" 
                                data-options="
                                   url:'<?=base_url()?>index.php/adr/loadADR',
                                   valueField:'DRPselection2',
                                   textField:'DRPselection2',
                                "
-                               />
+                               /> -->
+                
+                
+                
+                
             </label>
         </div>
         
@@ -523,16 +657,16 @@
         <div style="padding: 10px">
             <label>
                
-                <input type="radio"  id="adr_response"  name="drp_response"  /> Resolved
-                <input type="radio"  id="adr_improved"  name="drp_improved" /> Improved 
+                <input type="radio"  id="adr_response"    /> Resolved
+                <input type="radio"  id="adr_improved"  /> Improved 
                 
                 
-                <input class="easyui-textbox"  data-options=" multiline:true "  id="ResponseDetail3_adr"  name="ResponseDetail3_adr"  style="width:300px;height: 50px;"   />
+                <input class="easyui-textbox"  data-options=" multiline:true "  id="ResponseDetail3_adr"    style="width:300px;height: 50px;"   />
                   
                 <br>
                 
-                <input type="radio" id="adr_notim"   name="adr_notim" /> Not Improved
-                <input type="radio"  id="adr_na" name="adr_na" /> N/A
+                <input type="radio" id="adr_notim"    /> Not Improved
+                <input type="radio"  id="adr_na"  /> N/A
                 
             </label>
 

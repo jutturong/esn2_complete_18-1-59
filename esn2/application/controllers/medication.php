@@ -8,7 +8,7 @@ var  $name_app1="(Appendix 1 ) แบบบันทึกข้อมูลพ�
 
 
 //var  $tb_main="10-medicationerror";  
-var  $tb_main="medicationerror";  
+var  $tb_main="#mysql50#10-medicationerror";  
 
  
 
@@ -20,14 +20,28 @@ var  $tb_main="medicationerror";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
+          $this->load->model('date');
          //$this->load->helper('uri');
          
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
        }
 
-    
-    # http://drugstore.kku.ac.th/esn2/index.php/medication/date_medication/AB0216/11/12/2551
+       public  function  hn_medication()
+       {
+            # http://drugstore.kku.ac.th/esn2/index.php/medication/hn_medication/AB0216
+              $HN=$this->uri->segment(3);
+              $tb=$this->tb_main;
+              $q=$this->db->get_where($tb,array("HN"=>$HN));
+              foreach($q->result() as $row )
+              {
+                   $rows[]=$row;
+              }
+              echo  json_encode($rows);
+       }
+
+
+       # http://drugstore.kku.ac.th/esn2/index.php/medication/date_medication/AB0216/11/12/2551
        public function  date_medication()
        {
            $tb=$this->tb_main;
@@ -166,28 +180,28 @@ var  $tb_main="medicationerror";
        public function  insertADR()
        {
            $tb=$this->tb_main;
-           echo  $HN_adr=trim($this->input->get_post('HN_adr'));
-           echo "<br>";
-           echo  $MonitoringDate_adr=trim($this->input->get_post('MonitoringDate_adr'));
-           echo "<br>";
-           echo  $DRPselection2=trim($this->input->get_post('DRPselection2'));
-           echo  "<br>";
-           echo  $DRPDrug2=trim($this->input->get_post('DRPDrug2'));
-           echo "<br>";
-           echo $ADRDetail2=trim($this->input->get_post('ADRDetail2'));
-           echo "<br>";
-           echo  $Action2=trim($this->input->get_post('Action2'));
-           echo "<br>";
-           echo  $Response2=trim($this->input->get_post('Response2'));
-           echo "<br>";
-           echo  $ResponseDetail2=trim($this->input->get_post('ResponseDetail2'));
-           echo "<br>";
-           echo  $followup_adr=trim($this->input->get_post('followup_adr'));
-           echo "<br>";
-           echo  $week_adr=trim($this->input->get_post('week_adr'));
-           echo "<br>";
-           echo  $conv_week_adr=$this->user_model->databox_conv($week_adr);  
-           echo "<br>";
+           $HN_adr=trim($this->input->get_post('HN_adr'));
+           //echo "<br>";
+            $MonitoringDate_adr=trim($this->input->get_post('MonitoringDate_adr'));
+           //echo "<br>";
+             $DRPselection2=trim($this->input->get_post('DRPselection2'));
+           //echo  "<br>";
+            $DRPDrug2=trim($this->input->get_post('DRPDrug2'));
+          // echo "<br>";
+           $ADRDetail2=trim($this->input->get_post('ADRDetail2'));
+          // echo "<br>";
+            $Action2=trim($this->input->get_post('Action2'));
+           //echo "<br>";
+             $Response2=trim($this->input->get_post('Response2'));
+          // echo "<br>";
+            $ResponseDetail2=trim($this->input->get_post('ResponseDetail2'));
+           //echo "<br>";
+            $followup_adr=trim($this->input->get_post('followup_adr'));
+           //echo "<br>";
+             $week_adr=trim($this->input->get_post('week_adr'));
+          // echo "<br>";
+             $conv_week_adr=$this->date->conv_date( $week_adr );
+           //echo "<br>";
            
                 $this->db->set('HN', $HN_adr );
                 $this->db->set('MonitoringDate', $MonitoringDate_adr );
@@ -199,7 +213,15 @@ var  $tb_main="medicationerror";
                 $this->db->set('ResponseDetail2', $ResponseDetail2 );
                 $this->db->set('followup', $followup_adr );
                 $this->db->set('week', $conv_week_adr );              
-                $this->db->insert($tb);  
+               $ck= $this->db->insert($tb);  
+               if( $ck )
+               {
+                      echo "1";  
+               }
+               else
+               {
+                      echo "0";
+               }
             
        }
        
@@ -225,7 +247,7 @@ var  $tb_main="medicationerror";
            echo "<br>";
            $followup_medi=$this->input->get_post('followup_medi');  
            $week_medi=$this->input->get_post('week_medi');
-           $conv_week_medi=$this->user_model->databox_conv($week_medi);  
+          // $conv_week_medi=$this->user_model->databox_conv($week_medi);  
            
            
            
