@@ -433,11 +433,11 @@
                                                                       {
                                                                            $('#non_response').attr('checked',true);
                                                                       }
-                                                                      else if(  Response1 == '2'  )
+                                                                      else if(  Response1 == '3'  )
                                                                       {
                                                                            $('#non_notim').attr('checked',true);
                                                                       }
-                                                                      else if( Response1 == '3'  )
+                                                                      else if( Response1 == '2'  )
                                                                       {
                                                                            $('#non_improved').attr('checked',true);
                                                                       }
@@ -445,6 +445,7 @@
                                                                       {
                                                                            $('#non_na').attr('checked',true);
                                                                       }
+                                                                     
                                                                       
                                                                       var  	ResponseDetail1=k.ResponseDetail1;
                                                                     // alert( ResponseDetail1  );
