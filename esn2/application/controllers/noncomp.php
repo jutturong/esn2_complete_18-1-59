@@ -246,8 +246,11 @@ var  $tb_main="noncompliance_1";
               'Cause1_3'=>$Cause1_3,
               'Cause1_4'=>$Cause1_4,
               'Cause1_5'=>$Cause1_5,
+              
               'followup'=>$followup_non,
+           /*   
               'dmyweek'=>$conv_week_non,
+             */ 
           );
           
          

@@ -23,6 +23,20 @@ var  $tb_main="#mysql50#09-otherdrp";
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
        }
+       
+       public function  hn_dmy_other()
+       {
+             # http://drugstore.kku.ac.th/esn2/index.php/otherdrp/hn_dmy_other/ab3540/
+              $HN=trim($this->uri->segment(3));
+              $tb=$this->tb_main;
+              $q=$this->db->get_where($tb,array("HN"=>$HN));
+              foreach($q->result() as $row)
+              {
+                     $rows[]=$row;
+              }
+               echo  json_encode($rows);
+       }
+       
        # http://localhost/ci/index.php/otherdrp/loadOtherdrp/
        public  function loadOtherdrp()
        {
@@ -55,13 +69,15 @@ var  $tb_main="#mysql50#09-otherdrp";
        
        public  function  view_otherdrp()
        {
+           #http://drugstore.kku.ac.th/esn2/index.php/otherdrp/view_otherdrp/09/07/2552/gn2339
            $tb=$this->tb_main;
            $d1=$this->uri->segment(3);
            $d2=$this->uri->segment(4);
            $d3=$this->uri->segment(5);
            $HN=$this->uri->segment(6);
            $dmy=$d1."/".$d2."/".$d3;
-           $q=$this->db->get_where($tb,array("MonitoringDate"=>$dmy,"HN"=>$HN));
+          // $q=$this->db->get_where($tb,array("MonitoringDate"=>$dmy,"HN"=>$HN));
+             $q=$this->db->get_where($tb,array("HN"=>$HN));
            foreach($q->result() as $row )
            {
                  $rows[]=$row;

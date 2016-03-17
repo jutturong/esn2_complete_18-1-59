@@ -29,6 +29,7 @@ var  $tb_main="04__monitoring";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
+         $this->load->model('date');
          
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
@@ -69,7 +70,8 @@ public function saveBlood()
            $HN_blood= $this->input->get_post('HN_blood'); 
           //echo "<br>";
                 $MonitoringDate_blood=$this->input->get_post('MonitoringDate_blood');
-           $conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_blood);  
+         //  $conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_blood);  
+              $conv_MonitoringDate=$this->date->conv_date($MonitoringDate_blood);
           //echo "<br>";
            $hb=$this->input->get_post('hb'); //8
           //echo "<br>";  

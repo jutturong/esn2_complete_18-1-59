@@ -51,7 +51,8 @@ var  $tb_main="#mysql50#10-medicationerror";
           $d2=$this->uri->segment(5);
           $d3=$this->uri->segment(6);
           $dmy=$d1."/".$d2."/".$d3;
-          $q=$this->db->get_where($tb ,array("HN"=>$HN,"MonitoringDate"=>$dmy));
+        #  $q=$this->db->get_where($tb ,array("HN"=>$HN,"MonitoringDate"=>$dmy));
+           $q=$this->db->get_where($tb ,array("HN"=>$HN));
          // $q=$this->db->get($this->tb_main);
           foreach($q->result() as $row)
           {

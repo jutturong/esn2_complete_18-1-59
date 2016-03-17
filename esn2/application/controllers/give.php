@@ -53,7 +53,7 @@ var  $tb_main="06_giveinformation"; //06_giveinformation
            $HN=$this->uri->segment(3);
            $tb=$this->tb_main;
           
-           $objquery=$this->db->get($tb,array("HN"=>$HN),10,0);
+           $objquery=$this->db->get($tb,array("HN"=>$HN));
            $va_arr = array(); 
            foreach($objquery->result() as $row )
             {
@@ -67,7 +67,7 @@ var  $tb_main="06_giveinformation"; //06_giveinformation
        
        public  function  date_give()
        {
-          //  http://drugstore.kku.ac.th/esn2/index.php/give/date_give/
+           # http://drugstore.kku.ac.th/esn2/index.php/give/date_give/01/11/2555/dq0202
            $tb=$this->tb_main;
            $d1=$this->uri->segment(3);
            $d2=$this->uri->segment(4);
@@ -75,7 +75,8 @@ var  $tb_main="06_giveinformation"; //06_giveinformation
             $dcall=$d1."/".$d2."/".$d3;
             //echo  $dcall;
             $HN=$this->uri->segment(6);
-            $que=$this->db->get_where($tb,array("MonitoringDate"=>$dcall,"HN"=>$HN));
+            $que=$this->db->get_where($tb,array("HN"=>$HN));
+            //$que=$this->db->get_where($tb,array("MonitoringDate"=>$dcall));
             foreach($que->result() as $row)
             {
                  $rows[]=$row;

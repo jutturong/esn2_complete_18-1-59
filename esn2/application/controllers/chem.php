@@ -20,7 +20,7 @@ var  $tb_main="04__monitoring";
          $this->load->helper('date');
          $this->load->model('user_model');
          $this->load->library('session');
-         
+         $this->load->model('date');
          //in(8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
          
        }
@@ -91,8 +91,8 @@ var  $tb_main="04__monitoring";
            $tb=$this->tb_main; 
            $HN_chem1= $this->input->get_post('HN_chem1');          
            $MonitoringDate_chem1=$this->input->get_post('MonitoringDate_chem1');
-           $conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_chem1);  
-
+         //  $conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_chem1);  
+             $conv_MonitoringDate=$this->date->conv_date($MonitoringDate_chem1);  
            /*               
 LabCode
 LabGroup
@@ -285,8 +285,9 @@ Albumin
            $tb=$this->tb_main; 
            $HN_chem2= $this->input->get_post('HN_chem2');          
            $MonitoringDate_chem2=$this->input->get_post('MonitoringDate_chem2');
-           $conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_chem2);  
-
+          #$conv_MonitoringDate=$this->user_model->databox_conv($MonitoringDate_chem2);  
+          $conv_MonitoringDate=$this->date->conv_date($MonitoringDate_chem2);  
+          
         $chol=$this->input->get_post('tb');
          if( $chol != "" )
           {             

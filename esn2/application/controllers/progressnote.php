@@ -57,8 +57,7 @@ var  $tb_j1="user";
                
                  array_push($va_arr,$row);
             }
-             
-            
+
              echo json_encode($va_arr);
        }
        
@@ -121,33 +120,35 @@ var  $tb_j1="user";
       public  function insertprogress()
       {
           $tb=$this->tb_main;
-          $HN_pro=  addslashes($this->input->get_post('HN_pro'));
-          
-          $MonitoringDate_pro=addslashes($this->input->get_post('MonitoringDate_pro'));
-        // echo "<br>";
-          $Progress=  addslashes($this->input->get_post('Progress'));
-       //  echo "<br>";
-          $From=$this->input->get_post('From');
-        // echo "<br>";
+              $HN_pro=  addslashes($this->input->get_post('HN_pro'));
+          //echo "<br>";
+           $MonitoringDate_pro=addslashes($this->input->get_post('MonitoringDate_pro'));
+          //echo "<br>";
+            $Progress=  addslashes($this->input->get_post('Progress'));
+          //echo "<br>";
+           $From=$this->input->get_post('From');
+          //echo "<br>";
           $UserName=$this->input->get_post('UserName');
-       //  echo "<br>";
+          //echo "<br>";
           $UserSurname=$this->input->get_post('UserSurname');
-        // echo "<br>";
+         // echo "<br>";
           
                 $this->db->set('MonitoringDate', $MonitoringDate_pro );
                 $this->db->set('HN', $HN_pro );
                 $this->db->set('Clinic','Epilepsy Clinic');
                 $this->db->set('From',$From);
                 $this->db->set('Progress',$Progress);
-              $ck=  $this->db->insert($tb);  
+                $ck=  $this->db->insert($tb);  
+              
               if( $ck )
               {
                   echo "บันทึกข้อมูลสำเร็จ";
               }
-              elseif( !$ck )
+              else
               {
                   echo "ไม่สามารถบันทึกข้อมูลได้";
               }
+     
       }
        
        public  function updateprogress()

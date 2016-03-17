@@ -195,14 +195,14 @@
                 <!-- url:'<?=base_url()?>index.php/otherdrp/loadOtherdrp/',  -->
                 <input class="easyui-combobox"   id="drp_date"   style="width:200px;height: 30px;" 
                        data-options="
-                          url:'<?=base_url()?>index.php/otherdrp/loadOtherdrp/'  +   $('#HN_drp').textbox('getValue')   ,
+                        //  url:'<?=base_url()?>index.php/otherdrp/loadOtherdrp/'  +   $('#HN_drp').textbox('getValue')   ,
+                        url:'<?=base_url()?>index.php/otherdrp/hn_dmy_other/ab3540/'   +    $('#HN_drp').textbox('getValue')   ,
                           valueField:'MonitoringDate',
                           textField:'MonitoringDate',
                           onSelect:function()
                           {
                                   var   d=$('#drp_date').combobox('getValue');
                                 //  alert(d);
-                                
                                 $.getJSON(  '<?=base_url()?>index.php/otherdrp/view_otherdrp/'  +  d   +   '/'   +   $('#HN_drp').textbox('getValue')    ,function(data) 
                                 {   
                                      $.each(data,function(v,k)

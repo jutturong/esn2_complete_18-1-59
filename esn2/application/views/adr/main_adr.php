@@ -176,7 +176,7 @@
                                         HN :
                                     </td>
                                     <td>
-                                      <input class="easyui-textbox" style="width:70%;height: 30px" id="HN_adr" name="HN_adr" data-options="iconCls:'icon-man',readonly:true " required="require" >
+                                      <input class="easyui-textbox" style="width:70%;height: 30px" id="HN_adr" name="HN_adr" data-options="iconCls:'icon-man',readonly:true,required:true "  >
                                     </td>
                                 </tr>
                                 <tr>

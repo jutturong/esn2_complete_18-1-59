@@ -154,7 +154,7 @@ var  $tb_main="adr_1";
        
        public function  insertADR()
        {
-           $tb=$this->tb_main;
+            $tb=$this->tb_main;
             $HN_adr=trim($this->input->get_post('HN_adr'));
         //   echo "<br>";
             $MonitoringDate_adr=trim($this->input->get_post('MonitoringDate_adr'));
@@ -175,9 +175,8 @@ var  $tb_main="adr_1";
           // echo "<br>";
              $week_adr=trim($this->input->get_post('week_adr'));
           // echo "<br>";
-     //      echo  $conv_week_adr=$this->user_model->databox_conv($week_adr);  
-    //       echo "<br>";
-              $conv_week_adr =  $this->date->conv_date( $week_adr );
+
+             $conv_week_adr =  $this->date->conv_date( $week_adr );
           // echo "<br>";
            
            

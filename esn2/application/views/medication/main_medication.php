@@ -21,7 +21,7 @@
                       {
                            $.messager.alert('สถานะการบันทึก','บันทึกข้อมูลสำเร็จ','Info');    
                       }
-                      else if( result   == '0' )
+                      else if(   result == '0' )
                       {
                             $.messager.alert('สถานะการบันทึก','บันทึกข้อมูลล้มเหลว','Error');    
                        }
